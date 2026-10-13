@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Página no encontrada — The PR Project</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:#050542;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100%;
+    padding:2rem 1.25rem;
+    text-align:center;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:32rem;}
+  .code{
+    font-size:5rem;
+    font-weight:900;
+    color:#FFED05;
+    line-height:1;
+    margin-bottom:.5rem;
+  }
+  h1{font-size:1.4rem;font-weight:900;margin-bottom:.75rem;}
+  p{color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:2rem;}
+  .btn{
+    display:inline-flex;gap:.55rem;align-items:center;justify-content:center;
+    font-weight:900;border-radius:.9rem;padding:.9rem 1.4rem;text-decoration:none;
+    background:#FFED05;color:#050542;transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(255,237,5,.28);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="code">404</div>
+    <h1>No hemos encontrado esta página</h1>
+    <p>El enlace puede estar roto o la página se ha movido. Vuelve al inicio para seguir explorando The PR Project.</p>
+    <a class="btn" href="/">Volver al inicio</a>
+  </div>
+</body>
+</html>

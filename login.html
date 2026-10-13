@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The PR Project — Acceso Privado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pr-purple: #4E5AC3;
+    --pr-yellow: #FFED05;
+    --pr-orange: #FF8537;
+    --pr-dark:   #050542;
+    --base:      #F8F2E0;
+    --text:      #1C1A25;
+    --muted:     #6B647C;
+    --border:    #E6E0F0;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+  }
+
+  /* === LEFT PANEL === */
+  .left {
+    background: var(--pr-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .left-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .left-bg-circle-1 {
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(78,90,195,.35) 0%, transparent 70%);
+    top: -120px; left: -120px;
+  }
+  .left-bg-circle-2 {
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(255,237,5,.12) 0%, transparent 70%);
+    bottom: 40px; right: -60px;
+  }
+
+  .brand { position: relative; z-index: 1; }
+
+  .logo-wrap { margin-bottom: 3.5rem; }
+  .logo-wrap img { width: 120px; height: auto; filter: brightness(0) invert(1); opacity: .9; }
+
+  .headline {
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: -.5px;
+    color: #fff;
+    max-width: 400px;
+  }
+  .headline .accent { color: var(--pr-yellow); }
+
+  .left-footer { position: relative; z-index: 1; }
+
+  .divider-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1rem;
+  }
+  .divider-label::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--pr-purple);
+    border-radius: 2px;
+  }
+  .divider-label span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+  }
+
+  .left-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,.55);
+    font-weight: 400;
+    line-height: 1.7;
+    max-width: 300px;
+  }
+  .left-desc strong { color: rgba(255,255,255,.85); font-weight: 600; }
+
+  /* === RIGHT PANEL === */
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    background: var(--base);
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .login-header { margin-bottom: 2.5rem; }
+
+  .login-header h2 {
+    font-size: 1.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--pr-dark);
+    margin-bottom: .4rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: .5rem;
+  }
+  .login-header h2::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 52px; height: 4px;
+    border-radius: 4px;
+    background: var(--pr-purple);
+  }
+  .login-header p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: .75rem;
+  }
+
+  .form-group { margin-bottom: 1.1rem; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    height: 48px;
+    background: #fff;
+    border: 2px solid var(--border);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 0 14px;
+    border-radius: .75rem;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--pr-purple);
+    box-shadow: 0 0 0 3px rgba(78,90,195,.15);
+  }
+  input::placeholder { color: rgba(28,26,37,.3); }
+
+  .btn-login {
+    width: 100%;
+    height: 50px;
+    background: var(--pr-yellow);
+    border: none;
+    color: var(--pr-dark);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: .9rem;
+    border: 2px solid transparent;
+    transition: transform .2s, box-shadow .2s;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+  }
+  .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255,237,5,.3);
+  }
+  .btn-login:active { transform: scale(.99); }
+  .btn-login:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .error-msg {
+    background: rgba(220,60,60,.08);
+    border: 1.5px solid rgba(220,60,60,.3);
+    color: #c0392b;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 10px 14px;
+    margin-bottom: 1rem;
+    border-radius: .65rem;
+    display: none;
+  }
+
+  .success-panel {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+  .success-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(78,90,195,.1);
+    border: 2px solid var(--pr-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+  .success-icon svg {
+    width: 24px; height: 24px;
+    stroke: var(--pr-purple);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .success-panel h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--pr-dark);
+    margin-bottom: .4rem;
+  }
+  .success-panel p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer-note {
+    margin-top: 2rem;
+    font-size: 11px;
+    color: rgba(28,26,37,.3);
+    letter-spacing: .05em;
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 680px) {
+    .page { grid-template-columns: 1fr; }
+    .left { display: none; }
+    .right {
+      padding: 3rem 1.5rem;
+      align-items: flex-start;
+      padding-top: 4rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- LEFT -->
+  <div class="left">
+    <div class="left-bg-circle left-bg-circle-1"></div>
+    <div class="left-bg-circle left-bg-circle-2"></div>
+
+    <div class="brand">
+      <div class="logo-wrap">
+        <img src="images/logo.webp" alt="The PR Project" width="120" height="120">
+      </div>
+      <div class="headline">
+        Preview<br>
+        <span class="accent">Exclusivo</span>
+      </div>
+    </div>
+
+    <div class="left-footer">
+      <div class="divider-label"><span>Acceso restringido</span></div>
+      <p class="left-desc">
+        Has sido invitado a ver la <strong>nueva web de The PR Project</strong> antes de su lanzamiento oficial. Tu opinión es parte del proceso.
+      </p>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="login-card">
+      <div class="login-header">
+        <h2>Acceder</h2>
+        <p>Introduce tus credenciales de acceso</p>
+      </div>
+
+      <div id="error-msg" class="error-msg">Credenciales incorrectas</div>
+
+      <div id="login-form">
+        <div class="form-group">
+          <label for="email">Usuario</label>
+          <input type="text" id="email" placeholder="Usuario" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <button class="btn-login" id="btn" onclick="handleLogin(); return false;">
+          Entrar
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="success-panel" class="success-panel">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h3>Bienvenido</h3>
+        <p>Redirigiendo a la preview...</p>
+      </div>
+
+      <p class="footer-note">© 2026 The PR Project · Acceso privado</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /*
+   * ============================================================
+   *  SEGURIDAD — INSTRUCCIONES DE CONFIGURACIÓN
+   * ============================================================
+   *  Las contraseñas se almacenan como hashes SHA-256.
+   *  NUNCA guardes contraseñas en texto plano.
+   *
+   *  Para generar un hash, abre la consola del navegador y ejecuta:
+   *    await window._hash('tu_contraseña')
+   *  Copia el resultado y pégalo en el array USERS.
+   *
+   *  ⚠️  Nota: la autenticación client-side nunca es 100% segura.
+   *  Para producción real, usa autenticación server-side.
+   * ============================================================
+   */
+
+  // SHA-256 hashes de las contraseñas (no texto plano)
+  // Genera hashes con: await window._hash('tu_contraseña')
+  const USERS = [
+    {
+      email: 'lauindi',
+      passwordHash: '7e2bb1f8b1d11516516a4e568b50b9dec1e4d8a1b45511ea03c9a612a5fbe33a'
+    },
+    // { email: 'otro@usuario', passwordHash: 'hash_aqui' },
+  ];
+
+  // Redirect tras login correcto — cambia a tu URL real
+  const REDIRECT_URL = '/preview/index.html';
+
+  // Rate limiting: max intentos antes del bloqueo
+  const MAX_ATTEMPTS  = 5;
+  const LOCKOUT_MS    = 15 * 60 * 1000; // 15 minutos
+  const STORAGE_KEY   = 'tprp_login';
+
+  // ── Utilidad pública para generar hashes desde la consola ──
+  window._hash = async (password) => {
+    const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  };
+
+  async function hashPassword(password) {
+    return window._hash(password);
+  }
+
+  // ── Rate limiting helpers ──
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch { return {}; }
+  }
+  function saveState(s) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  }
+  function isLockedOut() {
+    const s = getState();
+    if (!s.lockedUntil) return false;
+    if (Date.now() < s.lockedUntil) return true;
+    saveState({});   // bloqueo expirado — reset
+    return false;
+  }
+  function recordFailure() {
+    const s = getState();
+    s.attempts = (s.attempts || 0) + 1;
+    if (s.attempts >= MAX_ATTEMPTS) {
+      s.lockedUntil = Date.now() + LOCKOUT_MS;
+    }
+    saveState(s);
+    return s.attempts;
+  }
+  function resetState() { localStorage.removeItem(STORAGE_KEY); }
+
+  function minutesLeft() {
+    const s = getState();
+    return Math.ceil((s.lockedUntil - Date.now()) / 60000);
+  }
+
+  // ── Botón con flecha ──
+  const BTN_INNER = 'Entrar <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+
+  function showError(msg) {
+    const el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+  function hideError() {
+    document.getElementById('error-msg').style.display = 'none';
+  }
+
+  async function handleLogin() {
+    const emailEl    = document.getElementById('email');
+    const passwordEl = document.getElementById('password');
+    const btn        = document.getElementById('btn');
+
+    hideError();
+
+    // Verificar bloqueo
+    if (isLockedOut()) {
+      showError(`Demasiados intentos. Espera ${minutesLeft()} min.`);
+      return;
+    }
+
+    const email    = emailEl.value.trim().toLowerCase();
+    const password = passwordEl.value;
+
+    if (!email || !password) {
+      showError('Rellena todos los campos');
+      return;
+    }
+
+    btn.textContent = 'Verificando...';
+    btn.disabled = true;
+
+    // Retardo mínimo de 600 ms + oplopend per intento fallido
+    const attempts = getState().attempts || 0;
+    const delay    = 600 + attempts * 200;
+
+    const [inputHash] = await Promise.all([
+      hashPassword(password),
+      new Promise(r => setTimeout(r, delay))
+    ]);
+
+    // Limpiar el campo de contraseña de memoria
+    passwordEl.value = '';
+
+    const match = USERS.find(u =>
+      u.email === email &&
+      u.passwordHash === inputHash
+    );
+
+    if (match) {
+      resetState();
+      sessionStorage.setItem('tprp_auth', '1');
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('success-panel').style.display = 'block';
+      setTimeout(() => { window.location.href = REDIRECT_URL; }, 1200);
+    } else {
+      const total = recordFailure();
+      if (isLockedOut()) {
+        showError(`Demasiados intentos. Cuenta bloqueada 15 min.`);
+        btn.disabled = true;
+      } else {
+        showError(`Credenciales incorrectas (${total}/${MAX_ATTEMPTS} intentos)`);
+        btn.innerHTML = BTN_INNER;
+        btn.disabled = false;
+      }
+    }
+  }
+
+  // Comprobar bloqueo al cargar
+  window.addEventListener('DOMContentLoaded', () => {
+    if (isLockedOut()) {
+      showError(`Cuenta bloqueada. Espera ${minutesLeft()} min.`);
+      document.getElementById('btn').disabled = true;
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleLogin();
+  });
+</script>
+</body>
+</html>

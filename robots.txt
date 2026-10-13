@@ -1,0 +1,12 @@
+# ============================================================
+#  The PR Project — robots.txt
+#  Canonical host: https://theprproject.es (non-www)
+#  www requests are 301-redirected to non-www by .htaccess
+# ============================================================
+
+# Allow all crawlers full access to the site.
+User-agent: *
+Allow: /
+
+# Sitemap (absolute URL, non-www host — must match the canonical host)
+Sitemap: https://theprproject.es/sitemap.xml
